@@ -1,10 +1,14 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import tw from "tailwind-styled-components"
+import Map from './components/Map/Map'
+
 
 
 export default function Home() {
+
   return (
     <Wrapper>
       <Head>
@@ -13,24 +17,57 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Map >
-        Map
-      </Map>
+      <Map />
       <ActionItems>
-        Start
+        {/* Header */}
+        <Header>
+          <UberLogo src='https://1000marcas.net/wp-content/uploads/2019/12/UBER-Logo.jpg' />
+          <Profile >
+            <Name>
+              User
+            </Name>
+            <UserImage src='https://www.silicon.es/wp-content/themes/kamino/assets/images/avatar.png' />
+          </Profile>
+        </Header>
+        {/* Action Button */}
+        <ActionButtons></ActionButtons>
+        {/* InputButton  */}
       </ActionItems>
     </Wrapper>
   )
 }
 
-const Wrapper = tw.div `
-
+const Wrapper = tw.div`
+  flex flex-col h-screen
 `
 
-const Map = tw.div `
-
+const ActionItems = tw.div`
+  flex-1 p-4
 `
 
-const ActionItems = tw.div `
+const Header = tw.div`
+  flex justify-between items-center
+`
 
+const UberLogo = tw.img`
+  h-28
+`
+
+const Profile = tw.div`
+  flex items-center 
+`
+
+const Name = tw.div`
+  mr-4 w-20 tesct-sm
+`
+
+const UserImage = tw.img`
+  h-12 w-12 rounded-full border border-gray-200 p-px
+`
+const ActionButtons = tw.div`
+  
+`
+
+const ActionButton = tw.div`
+  
 `
