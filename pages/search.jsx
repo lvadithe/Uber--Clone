@@ -31,7 +31,7 @@ export default function Search() {
             </SavedPlaces>
             {/* Confirm Location */}
             <ConfirmButtonContainer>
-                <ConfirmButton/>
+                Confirm Location 
             </ConfirmButtonContainer>
         </Wrapper>
     )
@@ -91,9 +91,6 @@ const StarIcon = tw.img`
 `
 
 const ConfirmButtonContainer = tw.div`
-    
-`
-
-const ConfirmButton = tw.div`
-    
+    bg-black text-white text-center mt-2 mx-4 
+    px-4 py-3 text-2xl cursor-pointer
 `
