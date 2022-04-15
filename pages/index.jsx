@@ -1,15 +1,32 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import tw from "tailwind-styled-components"
 import Map from './components/Map/Map'
 import Link from 'next/link'
-
-
+import { auth } from '../firebase'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const [user, setUser] = useState(null)
+  const router = useRouter()
 
+  useEffect(() => {
+    return onAuthStateChanged(auth, user => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoURL: user.photoURL
+        })
+      } else {
+        setUser(null)
+        router.push('/login')
+      }
+    })
+  }, [])
+  console.log(user)
   return (
     <Wrapper>
       <Head>
@@ -25,9 +42,13 @@ export default function Home() {
           <UberLogo src='https://1000marcas.net/wp-content/uploads/2019/12/UBER-Logo.jpg' />
           <Profile >
             <Name>
-              User
+              {
+                user ? user.name : 'Log in to access your account'
+              }
             </Name>
-            <UserImage src='https://www.silicon.es/wp-content/themes/kamino/assets/images/avatar.png' />
+            <UserImage src={user ? user.photoURL : 'https://i.ibb.co/CsV9RYZ/login-image.png'} 
+              onClick={() => signOut(auth)}
+            />
           </Profile>
         </Header>
         {/* Action Button */}
@@ -81,7 +102,7 @@ const Name = tw.div`
 `
 
 const UserImage = tw.img`
-  h-12 w-12 rounded-full border border-gray-200 p-px
+  h-12 w-12 rounded-full border-gray-200 p-px cursor-pointer
 `
 const ActionButtons = tw.div`
   flex
