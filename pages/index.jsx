@@ -98,7 +98,7 @@ const Profile = tw.div`
 `
 
 const Name = tw.div`
-  mr-4 w-20 tesct-sm
+  mr-4 w-20 text-sm
 `
 
 const UserImage = tw.img`

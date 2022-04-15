@@ -11,10 +11,11 @@ export default function RideSelector({ pickupCoordinates, dropoffCoordinates }) 
             `https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}.json?access_token=pk.eyJ1IjoicmFqZXNobTE3IiwiYSI6ImNrdm92OHo4djd6Z3MydXF3ank1NjF4N3IifQ.lAlVui9fWMcOxuJ8qTP0zQ`
         )
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setRideDuration(data.routes[0]?.duration / 100)
-            })
+            .then((data) => {
+                if (data.routes[0]) {
+                    setRideDuration(data.routes[0].duration / 100);
+                }
+            });
     }, [pickupCoordinates, dropoffCoordinates])
 
     return (
